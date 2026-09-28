@@ -144,7 +144,7 @@ struct gdb_server *gdb_server_create(struct gdb_backend *backend, char *bindstr,
 
 	/* turn off Nagle's algorithm -- we always send() whole packets
 	   and we want them to go out immediately (particularly acks) */
-	setsockopt(sock, SOL_TCP, TCP_NODELAY, &one, sizeof(one));
+	setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, &one, sizeof(one));
 
 	if (bind(sock, (struct sockaddr*)(&bind_address), sizeof(bind_address)) < 0) {
 		goto fail;

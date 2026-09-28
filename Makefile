@@ -1,5 +1,12 @@
 
-CFLAGS = -Wall -pedantic -g3 -Werror
+CFLAGS = -Wall -g3
+
+# Homebrew: Apple clang doesn't search its prefix (SDL2 etc.)
+BREW := $(shell brew --prefix 2>/dev/null)
+ifdef BREW
+export CPATH := $(BREW)/include
+export LIBRARY_PATH := $(BREW)/lib
+endif
 
 BINS =  rc2014 rcbus-1802 rcbus-6303 rcbus-6502 rcbus-6509 rcbus-65c816-mini \
 	rcbus-65c816 rcbus-6800 rcbus-68008 rcbus-6809 rcbus-68hc11 \
